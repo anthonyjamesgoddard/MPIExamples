@@ -3,6 +3,11 @@
 #include <vector>
 
 // use mpic++ to compile
+// 
+// mpic++ -o test mpitest.cpp
+// mpirun -np 2 ./test
+// replace 2 with the desired number of process
+
 
 namespace {
 const int problem_size = 100;
@@ -56,6 +61,7 @@ int main(int argc, char **argv) {
   // Maybe better to distribute the memory across
   // process? Maybe all the memory on one process
   // and broadcast when necessary ?
+  // ...Look into MPI_Bcast etc
   Matrix the_matrix(problem_size, problem_size);
   Vector the_vector(problem_size);
   int chunk_size = problem_size / world;
@@ -70,9 +76,8 @@ int main(int argc, char **argv) {
     }
   }
 
-  std::cout << "we are on process : " << rank << std::endl;
   for (int i = 0; i < chunk_size; i++) {
-    std::cout << the_result[i] << " from rank " << rank << " comp " << i
+    std::cout << the_result[i] << " from rank " << rank << " component " << i
               << std::endl;
   }
   // look at the out put, we can see that rank 0 does not have to preceed 
