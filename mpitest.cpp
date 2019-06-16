@@ -2,6 +2,8 @@
 #include <mpi.h>
 #include <vector>
 
+// use mpic++ to compile
+
 namespace {
 const int problem_size = 100;
 }
